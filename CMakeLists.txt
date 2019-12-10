@@ -1165,7 +1165,7 @@ else()
       SOVERSION "5"
       OUTPUT_NAME "zmq"
       PREFIX "lib")
-    target_compile_definitions(libzmq-static PUBLIC DLL_EXPORT)
+    target_compile_definitions(libzmq PUBLIC DLL_EXPORT)
     if(ZMQ_BUILD_FRAMEWORK)
       set_target_properties(libzmq PROPERTIES
         FRAMEWORK TRUE
