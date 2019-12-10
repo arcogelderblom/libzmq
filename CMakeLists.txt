@@ -1036,9 +1036,11 @@ if (WITH_DOCS)
     set(src ${txt})
     set(dst doc/${html})
     if(WITH_DOC)
-      add_custom_command(
+      add_custom_command (
         OUTPUT  ${dst}
-        COMMAND ${ASCIIDOC_EXECUTABLE}
+        COMMAND ${PYTHON_EXECUTABLE}
+        ARGS    -x
+        ${ASCIIDOC_EXECUTABLE}
         -d manpage
         -b xhtml11
         -f ${CMAKE_CURRENT_SOURCE_DIR}/doc/asciidoc.conf
@@ -1238,7 +1240,7 @@ if(BUILD_SHARED)
   endif()
 
   if(RT_LIBRARY)
-    target_link_libraries(libzmq -lrt)
+    target_link_libraries(libzmq ${RT_LIBRARY})
   endif()
 endif()
 
@@ -1268,7 +1270,7 @@ if(BUILD_STATIC)
   endif()
 
   if(RT_LIBRARY)
-    target_link_libraries(libzmq-static -lrt)
+    target_link_libraries(libzmq-static ${RT_LIBRARY})
   endif()
 
   if(CMAKE_SYSTEM_NAME MATCHES "QNX")
@@ -1396,8 +1398,7 @@ elseif(BUILD_SHARED OR BUILD_STATIC)
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 endif()
 
-install(
-    TARGETS ${target_outputs}
+install(    
     EXPORT ${targets_export_name}
     NAMESPACE ${namespace}
     DESTINATION ${config_install_dir}
