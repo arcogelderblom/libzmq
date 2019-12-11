@@ -1429,32 +1429,6 @@ if(WITH_DOC)
   endif()
 endif()
 
-if(WIN32)
-  set(ZEROMQ_CMAKECONFIG_INSTALL_DIR "CMake" CACHE STRING "install path for ZeroMQConfig.cmake")
-else()
-  # GNUInstallDirs "DATADIR" wrong here; CMake search path wants "share".
-  set(ZEROMQ_CMAKECONFIG_INSTALL_DIR "share/cmake/${PROJECT_NAME}" CACHE STRING "install path for ZeroMQConfig.cmake")
-endif()
-
-if((NOT CMAKE_VERSION VERSION_LESS 3.0) AND (BUILD_SHARED OR BUILD_STATIC))
-  export(EXPORT ${targets_export_name}
-    FILE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Targets.cmake")
-endif()
-configure_package_config_file(builds/cmake/${PROJECT_NAME}Config.cmake.in
-  "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
-  INSTALL_DESTINATION ${ZEROMQ_CMAKECONFIG_INSTALL_DIR})
-write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
-  VERSION ${ZMQ_VERSION_MAJOR}.${ZMQ_VERSION_MINOR}.${ZMQ_VERSION_PATCH}
-  COMPATIBILITY AnyNewerVersion)
-if(BUILD_SHARED OR BUILD_STATIC)
-  install(EXPORT ${targets_export_name}
-    FILE ${PROJECT_NAME}Targets.cmake
-    DESTINATION ${ZEROMQ_CMAKECONFIG_INSTALL_DIR})
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
-    ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
-    DESTINATION ${ZEROMQ_CMAKECONFIG_INSTALL_DIR})
-endif()
-
 option(ENABLE_CPACK "Enables cpack rules" ON)
 if(MSVC AND ENABLE_CPACK)
   include(InstallRequiredSystemLibraries)
