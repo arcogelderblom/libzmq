@@ -1448,7 +1448,7 @@ write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Conf
   COMPATIBILITY AnyNewerVersion)
 if(BUILD_SHARED OR BUILD_STATIC)
   install(EXPORT ${targets_export_name}
-    NAMESPACE namespace
+    NAMESPACE ${namespace}
     FILE ${PROJECT_NAME}Targets.cmake
     DESTINATION ${ZEROMQ_CMAKECONFIG_INSTALL_DIR})
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
