@@ -1358,12 +1358,14 @@ endif()
 
  include(CMakePackageConfigHelpers)
 
+ configure_package_config_file(builds/cmake/${PROJECT_NAME}Config.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/${config_export_name}.cmake" INSTALL_DESTINATION ${config_install_dir})
+
  write_basic_package_version_file(
          ${version_config}
          VERSION ZMQ_VERSION_STRING
          COMPATIBILITY SameMajorVersion)
 
- install(FILES ${project_config} ${version_config}
+ install(FILES ${version_config}
          DESTINATION ${config_install_dir})
 
 #-----------------------------------------------------------------------------
