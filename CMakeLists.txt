@@ -1365,7 +1365,7 @@ endif()
          VERSION ZMQ_VERSION_STRING
          COMPATIBILITY SameMajorVersion)
 
- install(FILES ${version_config}
+ install(FILES ${project_config} ${version_config}
          DESTINATION ${config_install_dir})
 
 #-----------------------------------------------------------------------------
