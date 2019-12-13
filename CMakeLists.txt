@@ -512,10 +512,6 @@ if(CMAKE_SYSTEM_NAME MATCHES "SunOS" OR CMAKE_SYSTEM_NAME MATCHES "NetBSD" OR CM
   endif()
 endif()
 
-if(NOT ANDROID)
-    zmq_check_noexcept()
-endif()
-
 #-----------------------------------------------------------------------------
 if(NOT CMAKE_CROSSCOMPILING AND NOT MSVC)
   zmq_check_sock_cloexec()
